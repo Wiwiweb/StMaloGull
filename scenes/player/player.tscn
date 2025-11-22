@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpo6hfn0qatdr"]
+[gd_scene load_steps=5 format=3 uid="uid://dpo6hfn0qatdr"]
 
 [ext_resource type="Script" uid="uid://ju0ac4jy6ewm" path="res://scenes/player/player.gd" id="1_3vyb7"]
+[ext_resource type="PackedScene" uid="uid://dehxd7kwe4gpw" path="res://scenes/player/seagull_local.tscn" id="2_dovo2"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g2els"]
 
@@ -12,8 +13,11 @@ script = ExtResource("1_3vyb7")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_g2els")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_qhqgy")
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.304731e-08, 0.17364818, -0.9848077, 7.590403e-09, 0.9848077, 0.17364818, 1, 0, -4.371139e-08, -3.3000002, 1.3000002, 0)
+transform = Transform3D(-4.107526e-08, 0.34202018, -0.9396926, 1.4950174e-08, 0.9396926, 0.34202018, 1, 0, -4.371138e-08, -13.1, 7.6000004, 0)
+
+[node name="Seagull_local" parent="." instance=ExtResource("2_dovo2")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("SphereMesh_qhqgy")
