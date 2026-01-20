@@ -9,6 +9,7 @@
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_3vyb7")
+forward_velocity = 500.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_g2els")
