@@ -256,7 +256,7 @@ _data = {
 &"Take 001": SubResource("Animation_68lak")
 }
 
-[node name="Seagull_local" type="Node3D"]
+[node name="Seagull_model" type="Node3D"]
 
 [node name="Sketchfab_model" type="Node3D" parent="."]
 transform = Transform3D(-4.9215165e-09, 0, -0.112591185, 0, 0.11259117, 0, 0.11259118, 0, -4.921517e-09, 0, 0, 0)

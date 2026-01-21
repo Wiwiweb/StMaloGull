@@ -18,7 +18,7 @@ shape = SubResource("SphereShape3D_g2els")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-4.107526e-08, 0.34202018, -0.9396926, 1.4950174e-08, 0.9396926, 0.34202018, 1, 0, -4.371138e-08, -13.1, 7.6000004, 0)
 
-[node name="Seagull_local" parent="." instance=ExtResource("2_dovo2")]
+[node name="Seagull_model" parent="." instance=ExtResource("2_dovo2")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false

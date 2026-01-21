@@ -6,6 +6,7 @@ enum State {
 }
 
 @onready var stun_timer : Timer = $StunTimer
+@onready var animation_player : AnimationPlayer = $Seagull_model/AnimationPlayer
 
 @export var forward_velocity : float
 @export var stunned_back_velocity : float
@@ -31,9 +32,11 @@ func _physics_process(delta: float) -> void:
 func get_stunned() -> void:
 	print("Stunned!")
 	state = State.STUNNED
+	animation_player.stop(true)
 	stun_timer.start()
 
 
 func _on_stun_timer_timeout() -> void:
 	print("Recovered from stun")
+	animation_player.play("Take 001")
 	state = State.IDLE
