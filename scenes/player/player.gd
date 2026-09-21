@@ -1,4 +1,4 @@
-extends RigidBody3D
+extends CharacterBody3D
 
 enum State {
 	IDLE,
