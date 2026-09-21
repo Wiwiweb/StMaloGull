@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends RigidBody3D
 
 enum State {
 	IDLE,
@@ -29,14 +29,18 @@ func _physics_process(delta: float) -> void:
 	if collision:
 		get_stunned()
   
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("flap"):
+		get_stunned()
+
 func get_stunned() -> void:
 	print("Stunned!")
 	state = State.STUNNED
-	animation_player.stop(true)
+	animation_player.pause()
 	stun_timer.start()
 
 
 func _on_stun_timer_timeout() -> void:
 	print("Recovered from stun")
-	animation_player.play("Take 001")
+	animation_player.play()
 	state = State.IDLE

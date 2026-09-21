@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsyjgrubyptmn"]
+[gd_scene format=3 uid="uid://bsyjgrubyptmn"]
 
 [ext_resource type="PackedScene" uid="uid://dpo6hfn0qatdr" path="res://scenes/player/player.tscn" id="1_ig7tw"]
 
@@ -27,53 +27,53 @@ size = Vector2(5000, 5000)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
 albedo_color = Color(0.023529412, 0.25882354, 0.4509804, 1)
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" unique_id=1111216374]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=888246144]
 environment = SubResource("Environment_0xm2m")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1107051936]
 transform = Transform3D(-0.6083567, -0.20723414, 0.7661306, 0.7777354, 0.03676325, 0.62751585, -0.15820815, 0.9776004, 0.1388081, -2.8, 11.700001, -11.2)
 shadow_enabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1519207577]
 transform = Transform3D(7.44, 0, 0, 0, 6.2320013, 0, 0, 0, 3.5200002, 0, 0, 0)
 use_collision = true
 size = Vector3(10, 10, 1)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D" unique_id=181932488]
 transform = Transform3D(0.23999994, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 2.2328997, 0)
 height = 28.356998
 
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGBox3D"]
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGBox3D" unique_id=1383819743]
 transform = Transform3D(0.59999925, 0, 0, 0, -3.0605715e-08, -0.47147387, 0, 0.8865964, 1.6933132e-08, 0, 2.469255, 0)
 operation = 2
 radius = 2.859
 height = 7.77
 
-[node name="Floor" type="StaticBody3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="." unique_id=232839178]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1371887220]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_ig7tw")
 
-[node name="Beach" type="MeshInstance3D" parent="Floor"]
+[node name="Beach" type="MeshInstance3D" parent="Floor" unique_id=689402938]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2500, 0, 0)
 material_override = SubResource("StandardMaterial3D_0xm2m")
 mesh = SubResource("PlaneMesh_h2yge")
 skeleton = NodePath("")
 
-[node name="Ocean" type="MeshInstance3D" parent="Floor"]
+[node name="Ocean" type="MeshInstance3D" parent="Floor" unique_id=1465320697]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2500, 0, 0)
 material_override = SubResource("StandardMaterial3D_1bvp3")
 mesh = SubResource("PlaneMesh_h2yge")
 skeleton = NodePath("../Beach")
 
-[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+[node name="Player" parent="." unique_id=1836796806 instance=ExtResource("1_ig7tw")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.5, 2.6000004, 32.5)
 forward_velocity = 15.0
 stunned_back_velocity = 30.0
 max_turn_rate = 3.0
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Node3D" type="Node3D" parent="." unique_id=1609681491]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.400002, 0, 60.4)
