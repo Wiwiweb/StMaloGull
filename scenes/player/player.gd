@@ -8,6 +8,8 @@ enum State {
 @onready var stun_timer: Timer = $StunTimer
 @onready var animation_player: AnimationPlayer = $Seagull_model/AnimationPlayer
 
+@export var invert_y_axis: bool = false
+
 @export var forward_velocity: float = 15
 @export var stunned_back_velocity: float = 5
 @export var max_turn_rate: float = 1.2
@@ -21,6 +23,8 @@ func _physics_process(delta: float) -> void:
 	var motion := Vector3.ZERO
 	if state == State.IDLE:
 		var joystick_vector := Input.get_vector("move_left", "move_right", "move_down", "move_up")
+		if invert_y_axis:
+			joystick_vector.y = -joystick_vector.y
 		rotation.y = rotation.y + -joystick_vector.x * max_turn_rate * delta
 		rotation.z = rotation.z + joystick_vector.y * max_turn_rate * delta
 		var target_rotation_x := joystick_vector.x * max_tilt_when_turning

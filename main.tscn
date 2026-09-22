@@ -71,6 +71,7 @@ skeleton = NodePath("../Beach")
 
 [node name="Player" parent="." unique_id=1836796806 instance=ExtResource("1_ig7tw")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.5, 27.5, 91.600006)
+invert_y_axis = true
 max_turn_rate = 1.5
 max_tilt_when_turning = 0.8
 tilt_speed_when_turning = 0.5
