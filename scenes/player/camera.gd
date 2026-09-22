@@ -1,7 +1,7 @@
 extends Node3D
 
-@export var max_camera_rotation : float = 0.25
-@export var camera_lerp_speed : float = 5.0
+@export var max_camera_rotation: float = 0.25
+@export var camera_lerp_speed: float = 5.0
 
 func _process(delta: float) -> void:
     var joystick_vector := Input.get_vector("move_left", "move_right", "move_down", "move_up")
