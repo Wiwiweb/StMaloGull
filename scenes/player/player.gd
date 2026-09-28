@@ -17,18 +17,33 @@ enum State {
 @export var tilt_speed_when_turning: float = 2
 @export var tilt_speed_multiplier_when_returning: float = 5.0
 
+@export var pitch_angle_slowdown: float = deg_to_rad(60)
+@export var pitch_angle_max: float = deg_to_rad(80)
+
 var state: State = State.IDLE
 
 func _physics_process(delta: float) -> void:
 	var motion := Vector3.ZERO
 	if state == State.IDLE:
 		var joystick_vector := Input.get_vector("move_left", "move_right", "move_down", "move_up")
+		
+		# Turn
+		rotation.y = rotation.y + -joystick_vector.x * max_turn_rate * delta
+
+		# Pitch
 		if invert_y_axis:
 			joystick_vector.y = -joystick_vector.y
-		rotation.y = rotation.y + -joystick_vector.x * max_turn_rate * delta
-		rotation.z = rotation.z + joystick_vector.y * max_turn_rate * delta
+		var pitch_slowdown_factor := 1.0
+		if joystick_vector.y != 0:
+			pass
+		var pitching_deeper: bool = sign(joystick_vector.y) == sign(rotation.z)
+		if pitching_deeper and abs(rotation.z) > pitch_angle_slowdown:
+			pitch_slowdown_factor = 1.0 - (abs(rotation.z) - pitch_angle_slowdown) / (pitch_angle_max - pitch_angle_slowdown)
+		rotation.z = rotation.z + joystick_vector.y * max_turn_rate * pitch_slowdown_factor * delta
+
+		# Roll while turning
 		var target_rotation_x := joystick_vector.x * max_tilt_when_turning
-		var turning_deeper: bool = abs(target_rotation_x) > abs(rotation.x)
+		var turning_deeper: bool = sign(target_rotation_x) == sign(rotation.x)
 		var tilt_speed_multiplier := 1.0
 		if not turning_deeper:
 			tilt_speed_multiplier = tilt_speed_multiplier_when_returning
