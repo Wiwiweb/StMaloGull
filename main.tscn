@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bsyjgrubyptmn"]
 
 [ext_resource type="PackedScene" uid="uid://dpo6hfn0qatdr" path="res://scenes/player/player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://2pqolrcqkusk" path="res://scenes/target_person.tscn" id="2_0xm2m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -76,3 +77,8 @@ max_turn_rate = 1.5
 
 [node name="Node3D" type="Node3D" parent="." unique_id=1609681491]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.400002, 0, 60.4)
+
+[node name="Targets" type="Node" parent="." unique_id=1671718103]
+
+[node name="TargetPerson" parent="Targets" unique_id=1656134224 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -86.700005, 0, 0.3)

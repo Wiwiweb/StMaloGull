@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://2pqolrcqkusk"]
+
+[node name="TargetPerson" type="Node3D" unique_id=1656134224]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=814684992]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6000001, 0)
+use_collision = true
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=1813029652]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0500001, 0)
+use_collision = true
+radius = 0.4
+height = 2.1
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="." unique_id=559905264]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.5375001, 1.3000001, -0.4)
+radius = 0.1
+height = 1.175
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="." unique_id=334679843]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 0.1375001, 1, 0.49999997)
+radius = 0.1
+height = 0.9499999
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="." unique_id=452510443]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0999999, 1.6000004, -0.40000007)
+radius = 0.2
