@@ -15,13 +15,14 @@ enum State {
 
 @export var max_turn_rate: float = 1.2
 
-@export var roll_angle_max: float = deg_to_rad(25)
-@export var roll_speed_when_turning: float = 2
+@export var bank_angle_max: float = deg_to_rad(25)
+@export var bank_speed_when_turning: float = 2.5
 
 @export var pitch_angle_slowdown: float = deg_to_rad(60)
 @export var pitch_angle_max: float = deg_to_rad(80)
 
 var state: State = State.IDLE
+var bank_velocity: float = 0.0
 
 func _physics_process(delta: float) -> void:
 	var motion := Vector3.ZERO
@@ -40,9 +41,12 @@ func _physics_process(delta: float) -> void:
 			pitch_slowdown_factor = 1.0 - (abs(rotation.z) - pitch_angle_slowdown) / (pitch_angle_max - pitch_angle_slowdown)
 		rotation.z = rotation.z + joystick_vector.y * max_turn_rate * pitch_slowdown_factor * delta
 
-		# Slight roll while turning
-		var target_rotation_x := joystick_vector.x * roll_angle_max
-		rotation.x = lerp_angle(rotation.x, target_rotation_x, delta * roll_speed_when_turning)
+		# Slight and smooth bank while turning
+		var target_rotation_x := joystick_vector.x * bank_angle_max
+		# Critically damped spring: bank accelerates toward its target (ease-in) and settles smoothly (ease-out)
+		var bank_acceleration := bank_speed_when_turning * bank_speed_when_turning * (target_rotation_x - rotation.x) - 2.0 * bank_speed_when_turning * bank_velocity
+		bank_velocity += bank_acceleration * delta
+		rotation.x += bank_velocity * delta
 
 		motion = basis.x * forward_velocity * delta
 	elif state == State.STUNNED:
