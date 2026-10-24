@@ -10,7 +10,7 @@ enum State {
 
 @export var invert_y_axis: bool = false
 
-@export var forward_velocity: float = 15
+@export var max_velocity: float = 45
 @export var stunned_back_velocity: float = 5
 
 @export var max_turn_rate: float = 1.2
@@ -22,6 +22,7 @@ enum State {
 @export var pitch_angle_max: float = deg_to_rad(80)
 
 var state: State = State.IDLE
+var current_forward_velocity: float = 15
 var bank_velocity: float = 0.0
 
 func _physics_process(delta: float) -> void:
@@ -48,7 +49,12 @@ func _physics_process(delta: float) -> void:
 		bank_velocity += bank_acceleration * delta
 		rotation.x += bank_velocity * delta
 
-		motion = basis.x * forward_velocity * delta
+		# Change velocity
+		current_forward_velocity += -rotation.z * delta * 40
+		current_forward_velocity = clamp(current_forward_velocity, 1, max_velocity)
+
+		# Apply velocity
+		motion = basis.x * current_forward_velocity * delta
 	elif state == State.STUNNED:
 		motion = basis.x * -stunned_back_velocity * stun_timer.time_left / stun_timer.wait_time * delta
 
