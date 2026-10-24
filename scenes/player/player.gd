@@ -10,6 +10,7 @@ enum State {
 
 @export var invert_y_axis: bool = false
 
+@export var min_velocity: float = 5
 @export var max_velocity: float = 45
 @export var stunned_back_velocity: float = 5
 
@@ -35,7 +36,7 @@ func _physics_process(delta: float) -> void:
 
 		# Pitch
 		if invert_y_axis:
-			joystick_vector.y = -joystick_vector.y
+			joystick_vector.y = - joystick_vector.y
 		var pitch_slowdown_factor := 1.0
 		var pitching_deeper: bool = sign(joystick_vector.y) == sign(rotation.z)
 		if pitching_deeper and abs(rotation.z) > pitch_angle_slowdown:
@@ -50,8 +51,13 @@ func _physics_process(delta: float) -> void:
 		rotation.x += bank_velocity * delta
 
 		# Change velocity
-		current_forward_velocity += -rotation.z * delta * 40
-		current_forward_velocity = clamp(current_forward_velocity, 1, max_velocity)
+		var drag: float = pow(current_forward_velocity, 3) / 200000
+		var forward_lift := -rotation.z * 20
+		if rotation.z < 0: # Extra boost when diving for fun
+			forward_lift *= 2.5
+		current_forward_velocity += (forward_lift - drag) * delta
+		current_forward_velocity = max(current_forward_velocity, min_velocity)
+		print("Vel: %.3f - Change: %.3f - Drag: %.3f - Forward lift: %.3f" % [current_forward_velocity, (forward_lift - drag) * delta, drag, forward_lift])
 
 		# Apply velocity
 		motion = basis.x * current_forward_velocity * delta
@@ -64,7 +70,9 @@ func _physics_process(delta: float) -> void:
   
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("flap"):
-		get_stunned()
+		animation_player.play("Take 001")
+		animation_player.seek(0.0, true)
+		current_forward_velocity += 15
 
 func get_stunned() -> void:
 	print("Stunned!")
